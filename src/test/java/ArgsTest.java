@@ -52,4 +52,19 @@ public class ArgsTest {
         String path = args.getString('v');
         assertEquals("/home/bingoo", path);
     }
+
+
+    @Test
+    public void testBooleanIntString() {
+        String[] args = {"-d/home/bingoo", "-p8080", "-l"};
+
+        Args arg = new Args("l,p#,d*", args);
+        boolean logging = arg.getBoolean('l');
+        int port = arg.getInt('p');
+        String directory = arg.getString('d');
+
+        assertEquals("/home/bingoo", directory);
+        assertEquals(8080, port);
+        assertTrue(logging);
+    }
 }
